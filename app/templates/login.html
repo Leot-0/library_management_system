@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Login</h2>
+  <form method="POST" action="{{ url_for('routes.login') }}">
+    {{ form.hidden_tag() }}
+    <div>
+      {{ form.username.label }} {{ form.username(size=32) }}
+    </div>
+    <div>
+      {{ form.password.label }} {{ form.password(size=32) }}
+    </div>
+    <div>
+      {{ form.remember_me }} {{ form.remember_me.label }}
+    </div>
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+{% endblock %}

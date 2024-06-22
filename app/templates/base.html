@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ title }} - Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('routes.index') }}">Home</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('routes.add_book') }}">Add Book</a>
+        <a href="{{ url_for('routes.borrow_records') }}">Borrow Records</a>
+        <a href="{{ url_for('routes.logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('routes.login') }}">Login</a>
+      {% endif %}
+    </nav>
+    <div>
+      {% if form and form.search %}
+        <form method="POST" action="{{ url_for('routes.index') }}">
+          {{ form.hidden_tag() }}
+          {{ form.search(size=32) }}
+          {{ form.submit() }}
+        </form>
+      {% endif %}
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

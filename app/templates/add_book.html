@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Add Book</h2>
+  <form method="POST" action="{{ url_for('routes.add_book') }}" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div>
+      {{ form.title.label }} {{ form.title(size=64) }}
+    </div>
+    <div>
+      {{ form.author.label }} {{ form.author(size=64) }}
+    </div>
+    <div>
+      {{ form.publisher.label }} {{ form.publisher(size=64) }}
+    </div>
+    <div>
+      {{ form.publication_date.label }} {{ form.publication_date() }}
+    </div>
+    <div>
+      {{ form.isbn.label }} {{ form.isbn(size=20) }}
+    </div>
+    <div>
+      {{ form.category.label }} {{ form.category(size=64) }}
+    </div>
+    <div>
+      {{ form.stock_quantity.label }} {{ form.stock_quantity(value=1) }}
+    </div>
+    <div>
+      {{ form.image.label }} {{ form.image(id="image") }}
+      {% if form.image.data %}
+        <img id="bookImagePreview" src="{{ url_for('static', filename='uploads/' ~ form.image.data.filename) }}" alt="Book Image" width="100">
+      {% else %}
+        <img id="bookImagePreview" src="#" alt="Book Image Preview" width="100" style="display: none;">
+      {% endif %}
+    </div>
+    <div>
+      {{ form.auto_acquisition.label }} {{ form.auto_acquisition(id="auto_acquisition") }}
+    </div>
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+
+  <script>
+    document.querySelector('#auto_acquisition').addEventListener('change', function() {
+      if (this.checked) {
+        const imageInput = document.querySelector('#image');
+        if (imageInput.files.length > 0) {
+          const formData = new FormData();
+          formData.append('image', imageInput.files[0]);
+
+          fetch('{{ url_for("routes.auto_acquire_info") }}', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => {
+            document.querySelector('#auto_acquisition').disabled = false;
+            return response.json();
+          })
+          .then(data => {
+            if (data.error) {
+              alert(data.error);
+            } else {
+              document.querySelector('#title').value = data.title || '';
+              document.querySelector('#author').value = data.author || '';
+              document.querySelector('#publisher').value = data.publisher || '';
+              document.querySelector('#publication_date').value = data.publication_date || '';
+              document.querySelector('#isbn').value = data.isbn || '';
+              document.querySelector('#category').value = data.category || '';
+              document.querySelector('#stock_quantity').value = data.stock_quantity || 1;
+            }
+          })
+          .catch(error => {
+            document.querySelector('#auto_acquisition').disabled = false;
+            console.error('Error:', error);
+          });
+
+          // 显示获取信息中...的状态
+          document.querySelector('#auto_acquisition').disabled = true;
+          document.querySelector('#auto_acquisition').nextSibling.textContent = '获取信息中...';
+        } else {
+          alert('Please upload an image first.');
+        }
+      }
+    });
+
+    document.querySelector('#image').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.querySelector('#bookImagePreview').src = e.target.result;
+          document.querySelector('#bookImagePreview').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+{% endblock %}

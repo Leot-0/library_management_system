@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Edit Book</h2>
+  <form method="POST" action="{{ url_for('routes.edit_book', id=book.id) }}" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div>
+      {{ form.title.label }} {{ form.title(size=64) }}
+    </div>
+    <div>
+      {{ form.author.label }} {{ form.author(size=64) }}
+    </div>
+    <div>
+      {{ form.publisher.label }} {{ form.publisher(size=64) }}
+    </div>
+    <div>
+      {{ form.publication_date.label }} {{ form.publication_date() }}
+    </div>
+    <div>
+      {{ form.isbn.label }} {{ form.isbn(size=20) }}
+    </div>
+    <div>
+      {{ form.category.label }} {{ form.category(size=64) }}
+    </div>
+    <div>
+      {{ form.stock_quantity.label }} {{ form.stock_quantity() }}
+    </div>
+    <div>
+      {{ form.image.label }} {{ form.image() }}
+    </div>
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+{% endblock %}

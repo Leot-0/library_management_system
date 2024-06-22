@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Borrow Book - {{ book.title }}</h2>
+  <form method="POST" action="{{ url_for('routes.borrow_book', id=book.id) }}">
+    {{ form.hidden_tag() }}
+    <div>
+      {{ form.borrower_name.label }} {{ form.borrower_name(size=64) }}
+    </div>
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+{% endblock %}

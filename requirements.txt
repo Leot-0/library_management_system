@@ -1,0 +1,8 @@
+Flask==2.0.3
+Flask-SQLAlchemy==2.5.1
+Flask-Login==0.5.0
+Flask-WTF==1.0.0
+PyMySQL==1.0.2
+python-dotenv==0.19.2
+Werkzeug==2.0.3
+SQLAlchemy==1.4.47  # 添加这一行或更新现有行

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Book List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Publication Date</th>
+        <th>ISBN</th>
+        <th>Category</th>
+        <th>Stock Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td>
+            {% if book.image %}
+              <img src="{{ url_for('static', filename='uploads/' ~ book.image) }}" alt="Book Image" width="100">
+            {% endif %}
+          </td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publisher }}</td>
+          <td>{{ book.publication_date }}</td>
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.category }}</td>
+          <td>{{ book.stock_quantity }}</td>
+          <td>
+            <a href="{{ url_for('routes.edit_book', id=book.id) }}">Edit</a>
+            <form action="{{ url_for('routes.delete_book', id=book.id) }}" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+            <form action="{{ url_for('routes.borrow_book', id=book.id) }}" method="POST" style="display:inline;">
+              <button type="submit">Borrow</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

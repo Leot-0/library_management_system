@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Borrow Records</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Book Title</th>
+        <th>Borrower Name</th>
+        <th>Borrow Date</th>
+        <th>Return Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+        <tr>
+          <td>{{ record.book.title }}</td>
+          <td>{{ record.borrower_name }}</td>
+          <td>{{ record.borrow_date }}</td>
+          <td>{{ record.return_date or 'Not Returned' }}</td>
+          <td>
+            {% if not record.return_date %}
+              <form action="{{ url_for('routes.return_book', id=record.book_id) }}" method="POST" style="display:inline;">
+                <button type="submit">Return</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
