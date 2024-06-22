@@ -1,53 +1,53 @@
 
-# Library Management System
+# 图书管理系统
 
-This is a simple library management system built with Flask and MySQL. It allows administrators to manage books, borrow records, and users. The system also supports auto-acquisition of book information based on uploaded cover images using the SM.MS and OpenAI APIs.
+这是一个使用 Flask 和 MySQL 构建的简单图书管理系统。它允许管理员管理图书、借阅记录和用户。系统还支持基于上传的封面图片自动获取图书信息，使用 SM.MS 和 OpenAI API。
 
-## Features
+## 功能
 
-- Add, edit, and delete books.
-- Borrow and return books.
-- View borrow records.
-- Auto-acquisition of book information based on uploaded cover images.
-- Search for books by title, author, or ISBN.
+- 添加、编辑和删除图书
+- 借阅和归还图书
+- 查看借阅记录
+- 基于上传的封面图片自动获取图书信息
+- 根据书名、作者或 ISBN 搜索图书
 
-## Prerequisites
+## 前提条件
 
 - Python 3.x
 - MySQL
 
-## Installation
+## 安装步骤
 
-1. Clone the repository:
+1. 克隆仓库：
 
     ```sh
     git clone https://github.com/your-username/library_management_system.git
     cd library_management_system
     ```
 
-2. Create and activate a virtual environment:
+2. 创建并激活虚拟环境：
 
     ```sh
     python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    source venv/bin/activate  # Windows 上使用 `venv\Scripts\activate`
     ```
 
-3. Install the dependencies:
+3. 安装依赖项：
 
     ```sh
     pip install -r requirements.txt
     ```
 
-4. Set up the MySQL database:
+4. 设置 MySQL 数据库：
 
     ```sh
     mysql -u root -p
     CREATE DATABASE library_db;
     ```
 
-5. Configure the application:
+5. 配置应用程序：
 
-    - Create a `.env` file in the root directory and add the following:
+    - 在根目录创建 `.env` 文件并添加以下内容：
 
     ```sh
     FLASK_APP=app
@@ -56,7 +56,7 @@ This is a simple library management system built with Flask and MySQL. It allows
     SECRET_KEY=your_secret_key
     ```
 
-6. Initialize the database:
+6. 初始化数据库：
 
     ```sh
     flask db init
@@ -64,51 +64,51 @@ This is a simple library management system built with Flask and MySQL. It allows
     flask db upgrade
     ```
 
-## Running the Application
+## 运行应用程序
 
-1. Start the Flask development server:
+1. 启动 Flask 开发服务器：
 
     ```sh
     flask run
     ```
 
-2. Open your web browser and go to `http://127.0.0.1:5000`.
+2. 打开浏览器并访问 `http://127.0.0.1:5000`。
 
-## Usage
+## 使用方法
 
-### Adding a Book
+### 添加图书
 
-1. Go to the "Add Book" page.
-2. Fill out the form with the book details. If you enable the "Auto Acquisition" option, the form will auto-fill the details based on the uploaded cover image.
-3. Click the "Add Book" button.
+1. 转到“添加图书”页面。
+2. 填写图书详情表单。如果启用“自动获取”选项，表单将根据上传的封面图片自动填写详细信息。
+3. 点击“添加图书”按钮。
 
-### Editing a Book
+### 编辑图书
 
-1. Go to the "Home" page.
-2. Click on the "Edit" button next to the book you want to edit.
-3. Update the book details and click the "Save" button.
+1. 转到“主页”。
+2. 点击要编辑的图书旁边的“编辑”按钮。
+3. 更新图书详细信息并点击“保存”按钮。
 
-### Deleting a Book
+### 删除图书
 
-1. Go to the "Home" page.
-2. Click on the "Delete" button next to the book you want to delete.
+1. 转到“主页”。
+2. 点击要删除的图书旁边的“删除”按钮。
 
-### Borrowing a Book
+### 借阅图书
 
-1. Go to the "Home" page.
-2. Click on the "Borrow" button next to the book you want to borrow.
-3. Fill out the borrower's name and click the "Borrow" button.
+1. 转到“主页”。
+2. 点击要借阅的图书旁边的“借阅”按钮。
+3. 填写借阅人姓名并点击“借阅”按钮。
 
-### Returning a Book
+### 归还图书
 
-1. Go to the "Borrow Records" page.
-2. Click on the "Return" button next to the book you want to return.
+1. 转到“借阅记录”页面。
+2. 点击要归还的图书旁边的“归还”按钮。
 
-## Configuration
+## 配置
 
 ### SM.MS API
 
-To use the auto-acquisition feature, you need an SM.MS API token. Add the token to the `.env` file:
+要使用自动获取功能，需要一个 SM.MS API 令牌。在 `.env` 文件中添加令牌：
 
 ```sh
 SMMS_API_TOKEN=your_smms_api_token
@@ -116,12 +116,12 @@ SMMS_API_TOKEN=your_smms_api_token
 
 ### OpenAI API
 
-To use the OpenAI API for book information extraction, add your OpenAI API key to the `.env` file:
+要使用 OpenAI API 进行图书信息提取，请将您的 OpenAI API 密钥添加到 `.env` 文件中：
 
 ```sh
 OPENAI_API_KEY=your_openai_api_key
 ```
 
-## License
+## 许可证
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+本项目使用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。

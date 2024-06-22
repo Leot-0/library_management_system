@@ -132,9 +132,9 @@ def upload_image_to_smms(image_path, api_token):
         return None
 
 def get_book_info_from_image(image_url):
-    api_url = "https://api.pumpkinaigc.online/v1/chat/completions"
+    api_url = "https://api.pumpkinaigc.online/v1/chat/completions" # 替换为你的 OpenAI API url
     headers = {
-        "Authorization": "Bearer sk-5g27w3Dwsd0KnmLvB53f988fC0E24dE2880cC87c47E4864d",  # 替换为你的 OpenAI API Key
+        "Authorization": "Bearer XXXXXXXXXX",  # 替换为你的 OpenAI API Key
         "Content-Type": "application/json"
     }
 
@@ -197,7 +197,7 @@ def auto_acquire_info():
     print(f"Saving image to: {image_path}")  # 打印保存的路径
     image.save(image_path)
 
-    image_url = upload_image_to_smms(image_path, "akMOFwRT6gwFsdcb3JSmrxpdH2XjUOcj")  # 替换为你的 SM.MS API Token
+    image_url = upload_image_to_smms(image_path, "XXXXXXXXXXXXXXX")  # 替换为你的 SM.MS API Token
     if not image_url:
         print("Failed to upload image to SM.MS")  # 打印日志
         return jsonify({'error': 'Failed to upload image to SM.MS'}), 500
